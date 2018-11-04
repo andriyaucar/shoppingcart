@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="campaign">
+            <h2><span>Campaign</span> {{campaign.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Campaign Title</span></dt>
+                <dd>
+                    <span>{{campaign.campaignTitle}}</span>
+                </dd>
+                <dt><span>Discount Number</span></dt>
+                <dd>
+                    <span>{{campaign.discountNumber}}</span>
+                </dd>
+                <dt><span>Discount Type</span></dt>
+                <dd>
+                    <span>{{campaign.discountType}}</span>
+                </dd>
+                <dt><span>Min Product Count</span></dt>
+                <dd>
+                    <span>{{campaign.minProductCount}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/campaign', campaign.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

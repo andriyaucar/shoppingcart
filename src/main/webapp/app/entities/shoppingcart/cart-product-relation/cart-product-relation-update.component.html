@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cart-product-relation-heading">Create or edit a Cart Product Relation</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cartProductRelation.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cartProductRelation.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productStatus">Product Status</label>
+                    <select class="form-control" name="productStatus" [(ngModel)]="cartProductRelation.productStatus" id="field_productStatus"  required>
+                        <option value="RESOLVED">RESOLVED</option>
+                        <option value="SOLD">SOLD</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.productStatus?.dirty && editForm.controls.productStatus?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productStatus?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productCount">Product Count</label>
+                    <input type="number" class="form-control" name="productCount" id="field_productCount"
+                        [(ngModel)]="cartProductRelation.productCount" required/>
+                    <div [hidden]="!(editForm.controls.productCount?.dirty && editForm.controls.productCount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productCount?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.productCount?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_couponId">Coupon Id</label>
+                    <input type="number" class="form-control" name="couponId" id="field_couponId"
+                        [(ngModel)]="cartProductRelation.couponId" required/>
+                    <div [hidden]="!(editForm.controls.couponId?.dirty && editForm.controls.couponId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.couponId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.couponId?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_categoryId">Category Id</label>
+                    <input type="number" class="form-control" name="categoryId" id="field_categoryId"
+                        [(ngModel)]="cartProductRelation.categoryId" required/>
+                    <div [hidden]="!(editForm.controls.categoryId?.dirty && editForm.controls.categoryId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.categoryId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.categoryId?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="cartProductRelation.product" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productOption.id === cartProductRelation.product?.id ? cartProductRelation.product : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cart">Cart</label>
+                    <select class="form-control" id="field_cart" name="cart" [(ngModel)]="cartProductRelation.cart" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cartOption.id === cartProductRelation.cart?.id ? cartProductRelation.cart : cartOption" *ngFor="let cartOption of carts; trackBy: trackCartById">{{cartOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{
+    "name": "Coupon",
+    "fields": [
+        {
+            "fieldName": "minCartPrice",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "discountType",
+            "fieldType": "DiscountType",
+            "fieldValues": "RATE,AMOUNT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "discountNumber",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cart",
+            "otherEntityName": "cart",
+            "otherEntityRelationshipName": "coupon"
+        }
+    ],
+    "changelogDate": "20181104141444",
+    "entityTableName": "coupon",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "shoppingcart",
+    "applications": "*",
+    "microserviceName": "shoppingcart"
+}

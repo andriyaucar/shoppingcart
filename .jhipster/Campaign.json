@@ -1,0 +1,53 @@
+{
+    "name": "Campaign",
+    "fields": [
+        {
+            "fieldName": "campaignTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "discountNumber",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "discountType",
+            "fieldType": "DiscountType",
+            "fieldValues": "RATE,AMOUNT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "minProductCount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "campaign"
+        }
+    ],
+    "changelogDate": "20181104141438",
+    "entityTableName": "campaign",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "shoppingcart",
+    "applications": "*",
+    "microserviceName": "shoppingcart"
+}

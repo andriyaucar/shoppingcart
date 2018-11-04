@@ -1,0 +1,58 @@
+<div>
+    <h2 id="page-heading">
+        <span>Coupons</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-coupon" [routerLink]="['/coupon/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Coupon
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="coupons">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Min Cart Price</span></th>
+            <th><span>Discount Type</span></th>
+            <th><span>Discount Number</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let coupon of coupons ;trackBy: trackId">
+                <td><a [routerLink]="['/coupon', coupon.id, 'view' ]">{{coupon.id}}</a></td>
+                <td>{{coupon.minCartPrice}}</td>
+                <td>{{coupon.discountType}}</td>
+                <td>{{coupon.discountNumber}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/coupon', coupon.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/coupon', coupon.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'coupon/'+ coupon.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+{
+    "name": "Cart",
+    "fields": [
+        {
+            "fieldName": "costPerDelivery",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "costPerProduct",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cartProductRelation",
+            "otherEntityName": "cartProductRelation",
+            "otherEntityRelationshipName": "cart"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "cart",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityField": "cartproduct",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "coupon",
+            "otherEntityName": "coupon",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181104141443",
+    "entityTableName": "cart",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "shoppingcart",
+    "applications": "*",
+    "microserviceName": "shoppingcart"
+}

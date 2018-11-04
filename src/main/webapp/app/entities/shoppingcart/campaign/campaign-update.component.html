@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-campaign-heading">Create or edit a Campaign</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!campaign.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="campaign.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_campaignTitle">Campaign Title</label>
+                    <input type="text" class="form-control" name="campaignTitle" id="field_campaignTitle"
+                        [(ngModel)]="campaign.campaignTitle" required/>
+                    <div [hidden]="!(editForm.controls.campaignTitle?.dirty && editForm.controls.campaignTitle?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.campaignTitle?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_discountNumber">Discount Number</label>
+                    <input type="number" class="form-control" name="discountNumber" id="field_discountNumber"
+                        [(ngModel)]="campaign.discountNumber" required/>
+                    <div [hidden]="!(editForm.controls.discountNumber?.dirty && editForm.controls.discountNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.discountNumber?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.discountNumber?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_discountType">Discount Type</label>
+                    <select class="form-control" name="discountType" [(ngModel)]="campaign.discountType" id="field_discountType"  required>
+                        <option value="RATE">RATE</option>
+                        <option value="AMOUNT">AMOUNT</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.discountType?.dirty && editForm.controls.discountType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.discountType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minProductCount">Min Product Count</label>
+                    <input type="number" class="form-control" name="minProductCount" id="field_minProductCount"
+                        [(ngModel)]="campaign.minProductCount" required/>
+                    <div [hidden]="!(editForm.controls.minProductCount?.dirty && editForm.controls.minProductCount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minProductCount?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minProductCount?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

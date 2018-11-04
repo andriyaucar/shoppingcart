@@ -1,0 +1,38 @@
+{
+    "name": "Category",
+    "fields": [
+        {
+            "fieldName": "categoryTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "category"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "category",
+            "relationshipName": "campaign",
+            "otherEntityName": "campaign",
+            "otherEntityField": "categorycampaign",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181104141439",
+    "entityTableName": "category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "shoppingcart",
+    "applications": "*",
+    "microserviceName": "shoppingcart"
+}
