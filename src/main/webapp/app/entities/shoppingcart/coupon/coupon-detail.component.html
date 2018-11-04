@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="coupon">
+            <h2><span>Coupon</span> {{coupon.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Min Cart Price</span></dt>
+                <dd>
+                    <span>{{coupon.minCartPrice}}</span>
+                </dd>
+                <dt><span>Discount Type</span></dt>
+                <dd>
+                    <span>{{coupon.discountType}}</span>
+                </dd>
+                <dt><span>Discount Number</span></dt>
+                <dd>
+                    <span>{{coupon.discountNumber}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/coupon', coupon.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

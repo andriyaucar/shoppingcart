@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cart-heading">Create or edit a Cart</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cart.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cart.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_costPerDelivery">Cost Per Delivery</label>
+                    <input type="number" class="form-control" name="costPerDelivery" id="field_costPerDelivery"
+                        [(ngModel)]="cart.costPerDelivery" required/>
+                    <div [hidden]="!(editForm.controls.costPerDelivery?.dirty && editForm.controls.costPerDelivery?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.costPerDelivery?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.costPerDelivery?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_costPerProduct">Cost Per Product</label>
+                    <input type="number" class="form-control" name="costPerProduct" id="field_costPerProduct"
+                        [(ngModel)]="cart.costPerProduct" required/>
+                    <div [hidden]="!(editForm.controls.costPerProduct?.dirty && editForm.controls.costPerProduct?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.costPerProduct?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.costPerProduct?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_product">Product</label>
+                    <select class="form-control" id="field_product" multiple name="product" [(ngModel)]="cart.products">
+                        <option [ngValue]="getSelected(cart.products, productOption)" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.cartproduct}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_coupon">Coupon</label>
+                    <select class="form-control" id="field_coupon" name="coupon" [(ngModel)]="cart.coupon" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="couponOption.id === cart.coupon?.id ? cart.coupon : couponOption" *ngFor="let couponOption of coupons; trackBy: trackCouponById">{{couponOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-product-content-heading">Create or edit a Product Content</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!productContent.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="productContent.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productContentKey">Product Content Key</label>
+                    <input type="text" class="form-control" name="productContentKey" id="field_productContentKey"
+                        [(ngModel)]="productContent.productContentKey" required/>
+                    <div [hidden]="!(editForm.controls.productContentKey?.dirty && editForm.controls.productContentKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productContentKey?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productContentValue">Product Content Value</label>
+                    <input type="text" class="form-control" name="productContentValue" id="field_productContentValue"
+                        [(ngModel)]="productContent.productContentValue" required/>
+                    <div [hidden]="!(editForm.controls.productContentValue?.dirty && editForm.controls.productContentValue?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productContentValue?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="productContent.product" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productOption.id === productContent.product?.id ? productContent.product : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
