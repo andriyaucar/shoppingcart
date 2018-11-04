@@ -1,0 +1,65 @@
+entity Campaign {
+    campaignTitle String required,
+    discountNumber Double required,
+    discountType DiscountType required,
+    minProductCount Long required
+}
+
+entity Category {
+	categoryTitle String required
+}
+
+entity Product {
+	productTitle String required,
+    productPrice Double required,
+    totalProductCount Long required,
+    availableProductCount Long required,
+    productNumber String required,
+    serialNumber String required
+}
+
+entity ProductContent {
+	productContentKey String required,
+	productContentValue String required
+}
+
+entity CartProductRelation {
+	productStatus ProductStatus required,
+    productCount Long required,
+    couponId Long required,
+    categoryId Long required
+}
+
+entity Cart {
+	costPerDelivery Double required,
+    costPerProduct Double required
+}
+
+entity Coupon {
+	minCartPrice Double required,
+    discountType DiscountType required,
+    discountNumber Double required
+}
+
+enum DiscountType {
+    RATE,
+    AMOUNT
+}
+enum ProductStatus {
+    RESOLVED,
+    SOLD
+}
+
+relationship ManyToMany {
+	Category{campaign(categorycampaign)} to Campaign{category}
+    Cart{product(cartproduct)} to Product{cart}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Product{productContent} to ProductContent,
+	Product{cartProductRelation} to CartProductRelation,
+	Category{product} to Product,
+    Cart{cartProductRelation} to CartProductRelation,
+    Coupon{cart} to Cart
+}
